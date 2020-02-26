@@ -403,7 +403,15 @@ python3之后的解决办法：nonlocal关键字
 
 **python weakref**
 
-weakref.ref
+《流畅的Python2015》8.6
+
+weakref.ref()
+
+weakref.WeakValueDictionary()
+
+weakref.WeakKeyDictionary()
+
+weakref.WeakSet()
 
 weakref.proxy
 
@@ -525,5 +533,38 @@ append extend
 ---
 
 cmp() 函数已经“离开”了，如果你真的需要 cmp() 函数，你可以用表达式 (a > b) - (a < b) 代替 cmp(a,b)。
+
+
+
+---
+
+super(*类*名, self).*方法*名(*方法*参数)
+
+---
+
+**python作用域**
+
+[https://foofish.net/python-legb.html](https://foofish.net/python-legb.html)
+
+LEGB规则: 查找一个名称的顺序为：local-->enclosing-->global-->builtin。
+
+python中，类、函数、模块会产生一个作用域，代码块不会，所以 if 代码块里面的代码和外面是是同一个作用域。
+
+---
+
+**打印调用栈**
+
+```python
+import traceback
+traceback.print_stack()
+```
+
+---
+
+**打印函数参数**
+
+```python
+print(func.__code__.co_varnames)
+```
 
 
