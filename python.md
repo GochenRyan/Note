@@ -534,8 +534,6 @@ append extend
 
 cmp() 函数已经“离开”了，如果你真的需要 cmp() 函数，你可以用表达式 (a > b) - (a < b) 代替 cmp(a,b)。
 
-
-
 ---
 
 super(*类*名, self).*方法*名(*方法*参数)
@@ -567,4 +565,40 @@ traceback.print_stack()
 print(func.__code__.co_varnames)
 ```
 
+---
 
+**修改字符串中字符**
+
+python中的字符串是**不能修改**的，需要将字符串转换成list，再转换回来。
+
+```python
+tmp=list(s)
+tmp[n]=xxxxx
+s=''.join(tmp)
+```
+
+---
+
+**dict与列表索引效率**
+
+[https://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/index.html](https://www.ibm.com/developerworks/cn/linux/l-cn-python-optim/index.html)
+
+Python 字典中使用了 hash table，因此查找操作的复杂度为 O(1)，而 list 实际是个数组，在 list 中，查找需要遍历整个 list，其复杂度为 O(n)，因此对成员的查找访问等操作字典要比 list 更快。
+
+```python
+from time import time 
+ t = time() 
+ list = ['a','b','is','python','jason','hello','hill','with','phone','test', 
+'dfdf','apple','pddf','ind','basic','none','baecr','var','bana','dd','wrd'] 
+ #list = dict.fromkeys(list,True) 
+ print list 
+ filter = [] 
+ for i in range (1000000): 
+     for find in ['is','hat','new','list','old','.']: 
+         if find not in list: 
+             filter.append(find) 
+ print "total run time:"
+ print time()-t
+```
+
+上述代码运行大概需要 16.09seconds。如果去掉行 #list = dict.fromkeys(list,True) 的注释，将 list 转换为字典之后再运行，时间大约为 8.375 seconds，效率大概提高了一半。因此在需要多数据成员进行频繁的查找或者访问的时候，使用 dict 而不是 list 是一个较好的选择
